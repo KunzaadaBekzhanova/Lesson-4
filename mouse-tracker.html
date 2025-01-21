@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cursor Tracker</title>
+    <style>
+        #tracker-block {
+            width: 500px;
+            height: 500px;
+            border: 2px solid black;
+            position: relative;
+            margin: 20px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+        }
+        #coordinates {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            font-size: 14px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+
+<div id="tracker-block">
+    Передвигайте курсор вокруг коробки.
+    <div id="coordinates">X: 0, Y: 0</div>
+</div>
+
+<script>
+    const trackerBlock = document.getElementById('tracker-block');
+    const coordinates = document.getElementById('coordinates');
+
+    trackerBlock.addEventListener('mousemove', (event) => {
+        const rect = trackerBlock.getBoundingClientRect();
+        const x = Math.round(event.clientX - rect.left);
+        const y = Math.round(event.clientY - rect.top);
+        coordinates.textContent = `X: ${x}, Y: ${y}`;
+    });
+
+    trackerBlock.addEventListener('mouseleave', () => {
+        coordinates.textContent = 'X: 0, Y: 0';
+    });
+</script>
+
+</body>
+</html>
